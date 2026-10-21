@@ -4,6 +4,15 @@ import ast
 import heapq
 from collections import deque
 
+# Laboratory Exercise 4: A* Algorithm in Python
+
+# Members:
+# Lamzon, Ellen Faith (2023-60093) 
+# Malupangue, Carl Cyrill (2023-60041) 
+# Ringcunada, Ivy (2023-00424)
+
+
+
 # --- Core Logic ---
 GOAL_STATE = [1, 2, 3, 4, 5, 6, 7, 8, '']
 
