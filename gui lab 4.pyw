@@ -219,11 +219,17 @@ class EightPuzzleSolverGUI(tk.Tk):
                                     activebackground=self.magenta, relief="raised", bd=2, command=self.show_manual_input)
         self.manual_btn.grid(row=0, column=1, padx=5)
         
-        # setup the input text box but don't pack it to the window yet
+        # setup the input text box and back button, but don't pack to the window yet
         self.input_frame = tk.Frame(self, bg=self.bg_color)
-        self.input_entry = tk.Entry(self.input_frame, width=35, bg=self.blank_color, fg=self.yellow, font=arcade_font, 
+        self.input_entry = tk.Entry(self.input_frame, width=30, bg=self.blank_color, fg=self.yellow, font=arcade_font, 
                                     insertbackground=self.cyan, justify="center", bd=2, relief="solid")
         self.input_entry.insert(0, "[1, 2, 3, 8, '', 4, 5, 6, 7]")
+        self.input_entry.grid(row=0, column=0, padx=5)
+        
+        # back button so they can return to the choice menu
+        self.back_btn = tk.Button(self.input_frame, text="BACK", bg=self.magenta, fg=self.yellow, font=arcade_font,
+                                  activebackground=self.cyan, activeforeground=self.bg_color, relief="raised", bd=2, command=self.show_choices)
+        self.back_btn.grid(row=0, column=1, padx=5)
         
         # solver buttons
         btn_frame = tk.Frame(self, bg=self.bg_color)
@@ -277,9 +283,14 @@ class EightPuzzleSolverGUI(tk.Tk):
         self.choice_frame.pack_forget()
         # pop the input box onto the screen right below the initial state label
         self.input_frame.pack(after=self.pack_slaves()[0], pady=5)
-        self.input_entry.pack(pady=5)
         self.input_entry.focus_set()
         self.status_label.config(text="READY. ENTER BOARD AND SELECT SOLVER.")
+
+    def show_choices(self):
+        # hide the text box and bring the choice buttons back
+        self.input_frame.pack_forget()
+        self.choice_frame.pack(after=self.pack_slaves()[0], pady=5)
+        self.status_label.config(text="READY. SELECT INPUT METHOD TO BEGIN.")
 
     def load_from_file(self):
         # pop open the file browser
@@ -308,7 +319,6 @@ class EightPuzzleSolverGUI(tk.Tk):
                 # hide the buttons and reveal the text box containing the loaded data
                 self.choice_frame.pack_forget()
                 self.input_frame.pack(after=self.pack_slaves()[0], pady=5)
-                self.input_entry.pack(pady=5)
                 
                 self.input_entry.delete(0, tk.END)
                 self.input_entry.insert(0, str(initial_state))
