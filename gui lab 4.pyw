@@ -223,7 +223,7 @@ class EightPuzzleSolverGUI(tk.Tk):
         self.input_frame = tk.Frame(self, bg=self.bg_color)
         self.input_entry = tk.Entry(self.input_frame, width=35, bg=self.blank_color, fg=self.yellow, font=arcade_font, 
                                     insertbackground=self.cyan, justify="center", bd=2, relief="solid")
-        self.input_entry.insert(0, "[1, 2, 3, 4, '', 8, 5, 6, 7]")
+        self.input_entry.insert(0, "[1, 2, 3, 8, '', 4, 5, 6, 7]")
         
         # solver buttons
         btn_frame = tk.Frame(self, bg=self.bg_color)
